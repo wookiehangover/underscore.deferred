@@ -5,10 +5,3 @@ test("its should be part of Underscore", function() {
   equal( typeof _.Deferred, 'function' );
 });
 
-//module("Basic Functionality");
-
-//test("_.when", function(){
-  //_.when( true ).done(function(){
-    
-  //});
-//});

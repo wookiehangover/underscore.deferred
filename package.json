@@ -1,0 +1,16 @@
+{
+  "author": "wookiehangover <sam@quickleft.com> (http://quickleft.com)",
+  "name": "underscore.deferred",
+  "description": "Underscore style Deferreds",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wookiehangover/underscore.Deferred",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wookiehangover/Underscore.Deferred.git"
+  },
+  "engines": {
+    "node": "~v0.4.11"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

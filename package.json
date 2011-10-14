@@ -6,7 +6,7 @@
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "repository": {
     "type": "git",
-    "url": "git://github.com/wookiehangover/Underscore.Deferred.git"
+    "url": "git://github.com/wookiehangover/underscore.Deferred.git"
   },
   "engines": {
     "node": "~v0.4.11"

@@ -39,6 +39,9 @@ including Underscore on the page, make sure you include it before
 Underscore.Deferred. If you don't have Underscore, the plugin attaches to
 `window._`.
 
+Addionally, underscore.Deferred can be used with the [Ender.js build
+tool][ender], if you're into that sort of thing.
+
 On the server, simply install via npm and require normally. If you'd like to
 use it as an Underscore module, just do this:
 
@@ -60,3 +63,4 @@ MIT License.
 
 [promise]: http://wiki.commonjs.org/wiki/Promises
 [jquery-docs]: http://api.jquery.com/category/deferred-object/
+[ender]: http://ender.no.de/

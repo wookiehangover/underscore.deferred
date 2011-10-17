@@ -9,6 +9,7 @@
     "url": "git://github.com/wookiehangover/underscore.Deferred.git"
   },
   "main": "lib/underscore.deferred.js",
+  "ender": "lib/ender.js",
   "engines": {
     "node": "~v0.4.11"
   },

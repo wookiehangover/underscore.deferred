@@ -1,0 +1,21 @@
+{
+	"files": {
+		"dist/underscore.deferred": {
+			"src": [
+				"lib/underscore.deferred.js"
+			],
+			"prehint": true,
+			"posthint": false,
+			"debug": true,
+
+			"meta": {
+				"label": "underscore.deferred",
+				"author": "",
+				"version": "0.0.0",
+				"homeurl": "",
+				"license": [],
+				"copyright": ""
+			}
+		}
+	}
+}

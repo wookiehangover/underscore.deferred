@@ -14,5 +14,12 @@
     "node": "~v0.4.11"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "underscore": "*",
+    "jshint": "*",
+    "uglify-js": "*",
+    "stats": "*",
+    "colors": "*",
+    "zlib": "*",
+  }
 }

@@ -30,6 +30,21 @@ Underscore.Deferred supports the following methods:
 
 For specific API documentation, look to the [jQuery Docs][jquery-docs].
 
+## Build
+
+One time setup command:
+
+```
+$ npm install
+```
+
+To build
+
+```
+$ jake
+```
+
+
 ## Usage
 
 Underscore.Deferred works on the server and in the browser.

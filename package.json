@@ -15,11 +15,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "underscore": "*",
-    "jshint": "*",
-    "uglify-js": "*",
-    "stats": "*",
-    "colors": "*",
-    "zlib": "*"
+		"underscore": "*",
+		"jshint": "*",
+		"uglify-js": "*",
+		"express": "*",
+		"colors": "*",
+		"zlib": "*",
+		"dateformat": "*"
   }
 }

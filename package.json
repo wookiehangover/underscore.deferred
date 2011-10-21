@@ -20,6 +20,6 @@
     "uglify-js": "*",
     "stats": "*",
     "colors": "*",
-    "zlib": "*",
+    "zlib": "*"
   }
 }

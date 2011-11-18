@@ -2,7 +2,7 @@
   "author": "wookiehangover <sam@quickleft.com> (http://quickleft.com)",
   "name": "underscore.deferred",
   "description": "Underscore style Deferreds",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "main": "lib/underscore.deferred.js",
   "ender": "lib/ender.js",
   "engines": {
-    "node": "~v0.4.11"
+    "node": "~v0.6.0"
   },
   "dependencies": {},
   "devDependencies": {

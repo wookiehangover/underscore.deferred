@@ -2,124 +2,18 @@ module("deferred" );
 
 _.each( [ "", " - new operator" ], function( withNew ) {
 
-
-  function createDeferred() {
-    return withNew ? new _._Deferred() : _._Deferred();
-  }
-
-  test("_._Deferred" + withNew, function() {
-
-    expect( 11 );
-
-    var deferred,
-      object,
-      test;
-
-    deferred = createDeferred();
-
-    test = false;
-
-    deferred.done( function( value ) {
-      equals( value , "value" , "Test pre-resolve callback" );
-      test = true;
-    } );
-
-    deferred.resolve( "value" );
-
-    ok( test , "Test pre-resolve callbacks called right away" );
-
-    test = false;
-
-    deferred.done( function( value ) {
-      equals( value , "value" , "Test post-resolve callback" );
-      test = true;
-    } );
-
-    ok( test , "Test post-resolve callbacks called right away" );
-
-    deferred.cancel();
-
-    test = true;
-
-    deferred.done( function() {
-      ok( false , "Cancel was ignored" );
-      test = false;
-    } );
-
-    ok( test , "Test cancel" );
-
-    deferred = createDeferred().resolve();
-
-    try {
-      deferred.done( function() {
-        throw "Error";
-      } , function() {
-        ok( true , "Test deferred do not cancel on exception" );
-      } );
-    } catch( e ) {
-      strictEqual( e , "Error" , "Test deferred propagates exceptions");
-      deferred.done();
-    }
-
-    test = "";
-    deferred = createDeferred().done( function() {
-
-      test += "A";
-
-    }, function() {
-
-      test += "B";
-
-    } ).resolve();
-
-    strictEqual( test , "AB" , "Test multiple done parameters" );
-
-    test = "";
-
-    deferred.done( function() {
-
-      deferred.done( function() {
-
-        test += "C";
-
-      } );
-
-      test += "A";
-
-    }, function() {
-
-      test += "B";
-    } );
-
-    strictEqual( test , "ABC" , "Test done callbacks order" );
-
-    deferred = createDeferred();
-
-    deferred.resolveWith( _ , [ document ] ).done( function( doc ) {
-      ok( this === _ && arguments.length === 1 && doc === document , "Test fire context & args" );
-    });
-
-    // #8421
-    deferred = createDeferred();
-    deferred.resolveWith().done(function() {
-      ok( true, "Test resolveWith can be called with no argument" );
-    });
-  });
-} );
-
-_.each( [ "", " - new operator" ], function( withNew ) {
-
   function createDeferred( fn ) {
     return withNew ? new _.Deferred( fn ) : _.Deferred( fn );
   }
 
   test("_.Deferred" + withNew, function() {
 
-    expect( 8 );
+    expect( 22 );
 
     createDeferred().resolve().then( function() {
       ok( true , "Success on resolve" );
       ok( this.isResolved(), "Deferred is resolved" );
+      strictEqual( this.state(), "resolved", "Deferred is resolved (state)" );
     }, function() {
       ok( false , "Error on resolve" );
     }).always( function() {
@@ -131,6 +25,7 @@ _.each( [ "", " - new operator" ], function( withNew ) {
     }, function() {
       ok( true , "Error on reject" );
       ok( this.isRejected(), "Deferred is rejected" );
+      strictEqual( this.state(), "rejected", "Deferred is rejected (state)" );
     }).always( function() {
       ok( true , "Always callback on reject" );
     });
@@ -141,8 +36,41 @@ _.each( [ "", " - new operator" ], function( withNew ) {
     }).then( function( value ) {
       strictEqual( value , "done" , "Passed function executed" );
     });
+
+    _.each( "resolve reject".split( " " ), function( change ) {
+      createDeferred( function( defer ) {
+        strictEqual( defer.state(), "pending", "pending after creation" );
+        var checked = 0;
+        defer.progress(function( value ) {
+          strictEqual( value, checked, "Progress: right value (" + value + ") received" );
+        });
+        for( checked = 0; checked < 3 ; checked++ ) {
+          defer.notify( checked );
+        }
+        strictEqual( defer.state(), "pending", "pending after notification" );
+        defer[ change ]();
+        notStrictEqual( defer.state(), "pending", "not pending after " + change );
+        defer.notify();
+      });
+    });
   });
+
 } );
+
+
+test( "_.Deferred - chainability", function() {
+
+  var methods = "resolve reject notify resolveWith rejectWith notifyWith done fail progress then always".split( " " ),
+    defer = _.Deferred();
+
+  expect( methods.length );
+
+  _.each( methods, function( method ) {
+    var object = { m: defer[ method ] };
+    strictEqual( object.m(), object, method + " is chainable" );
+  });
+});
+
 
 test( "_.Deferred.pipe - filtering (done)", function() {
 
@@ -216,6 +144,34 @@ test( "_.Deferred.pipe - filtering (fail)", function() {
   });
 });
 
+test( "_.Deferred.pipe - filtering (progress)", function() {
+
+  expect(3);
+
+  var defer = _.Deferred(),
+    piped = defer.pipe( null, null, function( a, b ) {
+      return a * b;
+    } ),
+    value1,
+    value2,
+    value3;
+
+  piped.progress(function( result ) {
+    value3 = result;
+  });
+
+  defer.progress(function( a, b ) {
+    value1 = a;
+    value2 = b;
+  });
+
+  defer.notify( 2, 3 );
+
+  strictEqual( value1, 2, "first progress value ok" );
+  strictEqual( value2, 3, "second progress value ok" );
+  strictEqual( value3, 6, "result of filter ok" );
+});
+
 test( "_.Deferred.pipe - deferred (done)", function() {
 
   expect(3);
@@ -276,6 +232,36 @@ test( "_.Deferred.pipe - deferred (fail)", function() {
   strictEqual( value3, 6, "result of filter ok" );
 });
 
+test( "_.Deferred.pipe - deferred (progress)", function() {
+
+  expect(3);
+
+  var defer = _.Deferred(),
+    piped = defer.pipe( null, null, function( a, b ) {
+      return _.Deferred(function( defer ) {
+        defer.resolve( a * b );
+      });
+    } ),
+    value1,
+    value2,
+    value3;
+
+  piped.done(function( result ) {
+    value3 = result;
+  });
+
+  defer.progress(function( a, b ) {
+    value1 = a;
+    value2 = b;
+  });
+
+  defer.notify( 2, 3 );
+
+  strictEqual( value1, 2, "first progress value ok" );
+  strictEqual( value2, 3, "second progress value ok" );
+  strictEqual( value3, 6, "result of filter ok" );
+});
+
 test( "_.Deferred.pipe - context", function() {
 
   expect(4);
@@ -302,7 +288,6 @@ test( "_.Deferred.pipe - context", function() {
   });
 });
 
-
 test( "_.when" , function() {
 
   expect( 23 );
@@ -320,7 +305,7 @@ test( "_.when" , function() {
     "undefined": undefined,
     "a plain object": {}
 
-  } , function( value, message ) {
+  } , function(  value, message ) {
 
     ok( _.isFunction( _.when( value ).done(function( resolveValue ) {
       strictEqual( resolveValue , value , "Test the promise was resolved with " + message );
@@ -346,36 +331,54 @@ test( "_.when" , function() {
 
 test("_.when - joined", function() {
 
-  expect(25);
+  expect(53);
 
   var deferreds = {
       value: 1,
       success: _.Deferred().resolve( 1 ),
       error: _.Deferred().reject( 0 ),
-      futureSuccess: _.Deferred(),
-      futureError: _.Deferred()
+      futureSuccess: _.Deferred().notify( true ),
+      futureError: _.Deferred().notify( true ),
+      notify: _.Deferred().notify( true )
     },
     willSucceed = {
       value: true,
       success: true,
-      error: false,
+      futureSuccess: true
+    },
+    willError = {
+      error: true,
+      futureError: true
+    },
+    willNotify = {
       futureSuccess: true,
-      futureError: false
+      futureError: true,
+      notify: true
     };
 
   _.each( deferreds, function( defer1, id1 ) {
     _.each( deferreds, function( defer2, id2 ) {
       var shouldResolve = willSucceed[ id1 ] && willSucceed[ id2 ],
+        shouldError = willError[ id1 ] || willError[ id2 ],
+        shouldNotify = willNotify[ id1 ] || willNotify[ id2 ],
         expected = shouldResolve ? [ 1, 1 ] : [ 0, undefined ],
-        code = id1 + "/" + id2;
-      _.when( defer1, defer2 ).done(function( a, b ) {
+          expectedNotify = shouldNotify && [ willNotify[ id1 ], willNotify[ id2 ] ],
+          code = id1 + "/" + id2;
+
+      var promise = _.when( defer1, defer2 ).done(function( a, b ) {
         if ( shouldResolve ) {
-          same( [ a, b ], expected, code + " => resolve" );
+          deepEqual( [ a, b ], expected, code + " => resolve" );
+        } else {
+          ok( false ,  code + " => resolve" );
         }
       }).fail(function( a, b ) {
-        if ( !shouldResolve ) {
-          same( [ a, b ], expected, code + " => resolve" );
+        if ( shouldError ) {
+          deepEqual( [ a, b ], expected, code + " => reject" );
+        } else {
+          ok( false ,  code + " => reject" );
         }
+      }).progress(function progress( a, b ) {
+        deepEqual( [ a, b ], expectedNotify, code + " => progress" );
       });
     } );
   } );

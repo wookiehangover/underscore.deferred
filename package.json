@@ -2,7 +2,7 @@
   "author": "wookiehangover <sam@quickleft.com> (http://quickleft.com)",
   "name": "underscore.deferred",
   "description": "Underscore style Deferreds",
-  "version": "0.0.3",
+  "version": "0.0.9",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "repository": {
     "type": "git",
@@ -15,13 +15,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "underscore": "*",
-    "jshint": "*",
-    "stats": "*",
-    "uglify-js": "*",
-    "express": "*",
-    "colors": "*",
-    "zlib": "*",
-    "dateformat": "*"
+    "grunt": "~0.2.15",
+    "phantomjs": "*",
+    "rimraf": "~2.0.1"
   }
 }

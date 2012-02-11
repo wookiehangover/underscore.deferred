@@ -1,10 +1,16 @@
 # Underscore.Deferred
 
-v0.1.0
+v0.1.1
 
 This is a port of jQuery.Deferred as an Underscore mixin, but it can be
 used without any depencencies. It currently matches the Deferred specifications
 and implementation from jQuery 1.7.1, with all the associated helpers.
+
+## Contributors
+
+* @rwldrn
+* @tbranyen
+* @taxillian
 
 ## Deferred's are great, let's take them everywhere
 

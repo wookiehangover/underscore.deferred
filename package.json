@@ -2,7 +2,7 @@
   "author": "wookiehangover <sam@quickleft.com> (http://quickleft.com)",
   "name": "underscore.deferred",
   "description": "Underscore style Deferreds",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "repository": {
     "type": "git",

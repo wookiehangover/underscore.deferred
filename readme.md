@@ -1,10 +1,10 @@
 # Underscore.Deferred
 
-v0.0.2
+v0.1.0
 
 This is a port of jQuery.Deferred as an Underscore mixin, but it can be
 used without any depencencies. It currently matches the Deferred specifications
-and implementation from jQuery 1.6.4, with all the associated helpers.
+and implementation from jQuery 1.7.1, with all the associated helpers.
 
 ## Deferred's are great, let's take them everywhere
 
@@ -16,13 +16,11 @@ reproduced without any dependencies.
 Underscore.Deferred supports the following methods:
 
 * done
-* resolveWith
 * resolve
 * isResolved
 * then
 * always
 * fail
-* rejectWith
 * reject
 * isRejected
 * pipe
@@ -38,10 +36,16 @@ One time setup command:
 $ npm install
 ```
 
-To build
+To build with [grunt](https://github.com/cowboy/grunt)
 
 ```
-$ jake
+$ node build
+```
+
+To run headless Qunit tests (must have phantomjs in your path)
+
+```
+$ node build test
 ```
 
 

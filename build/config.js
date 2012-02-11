@@ -38,4 +38,4 @@ config.init({
 
 // Run the following tasks...
 task.registerTask("default", "lint min");
-task.registerTask("test", "qunit clean min lint");
+task.registerTask("test", "qunit min lint");

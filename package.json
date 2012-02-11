@@ -2,7 +2,7 @@
   "author": "wookiehangover <sam@quickleft.com> (http://quickleft.com)",
   "name": "underscore.deferred",
   "description": "Underscore style Deferreds",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.2.15",
-    "rimraf": "~2.0.1"
+    "rimraf": "~2.0.1",
+    "underscore": "*"
   },
   "scripts": {
     "test": "node build test"

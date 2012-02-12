@@ -11,6 +11,7 @@ and implementation from jQuery 1.7.1, with all the associated helpers.
 * [rwldrn](https://github.com/rwldrn)
 * [tbranyen](https://github.com/tbranyen)
 * [taxillian](https://github.com/taxilian)
+* [danheberden](https://github.com/danheberden)
 
 ## Deferred's are great, let's take them everywhere
 

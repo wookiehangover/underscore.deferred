@@ -20,6 +20,6 @@
     "underscore": "*"
   },
   "scripts": {
-    "test": "node build test"
+    "test": "mocha -u qunit"
   }
 }

@@ -34,5 +34,5 @@
     "underscore": "*",
     "mocha": "*"
   },
-  "keywords": []
+  "keywords": ["deferreds", "underscore", "flow-control"]
 }

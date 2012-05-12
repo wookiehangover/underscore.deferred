@@ -52,7 +52,7 @@ $ node build
 To run headless Qunit tests (must have phantomjs in your path)
 
 ```
-$ node build test
+$ node build qunit
 ```
 
 

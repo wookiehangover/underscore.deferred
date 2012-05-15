@@ -32,6 +32,9 @@ Underscore.Deferred supports the following methods:
 * isRejected
 * pipe
 * promise
+* progress
+* notify
+* notifyWith
 
 For specific API documentation, look to the [jQuery Docs][jquery-docs].
 

@@ -6,13 +6,6 @@ This is a port of jQuery.Deferred as an Underscore mixin, but it can be
 used without any depencencies. It currently matches the Deferred specifications
 and implementation from jQuery 1.7.2, with all the associated helpers.
 
-## Contributors
-
-* [rwldrn](https://github.com/rwldrn)
-* [tbranyen](https://github.com/tbranyen)
-* [taxillian](https://github.com/taxilian)
-* [danheberden](https://github.com/danheberden)
-
 ## Deferred's are great, let's take them everywhere
 
 jQuery offers a robust, consistent and well documented API; this project aims
@@ -22,21 +15,41 @@ reproduced without any dependencies.
 
 Underscore.Deferred supports the following methods:
 
-* done
-* resolve
-* isResolved
-* then
-* always
-* fail
-* reject
-* isRejected
-* pipe
-* promise
-* progress
-* notify
-* notifyWith
+* [done](http://api.jquery.com/deferred.done/)
+* [resolve](http://api.jquery.com/deferred.resolve/)
+* [isResolved](http://api.jquery.com/deferred.isresolved/)
+* [then](http://api.jquery.com/deferred.then/)
+* [always](http://api.jquery.com/deferred.always/)
+* [fail](http://api.jquery.com/deferred.fail/)
+* [reject](http://api.jquery.com/deferred.reject/)
+* [isRejected](http://api.jquery.com/deferred.isrejected/)
+* [pipe](http://api.jquery.com/deferred.pipe/)
+* [promise](http://api.jquery.com/deferred.promise/)
+* [notify](http://api.jquery.com/deferred.notify/)
+* [notifyWith](http://api.jquery.com/deferred.notifywith/)
 
 For specific API documentation, look to the [jQuery Docs][jquery-docs].
+
+## Usage
+
+Underscore.Deferred works on the server and in the browser.
+
+In the browser, just require it like you would any other file. If you're
+including Underscore on the page, make sure you include it before
+Underscore.Deferred. If you don't have Underscore, the plugin attaches to
+`window._`.
+
+Addionally, underscore.Deferred can be used with the [Ender.js build
+tool][ender], if you're into that sort of thing.
+
+On the server, simply install via npm and require normally. If you'd like to
+use it as an Underscore module, just do this:
+
+    var _ = require('underscore')._
+    _.mixin( require('underscore.deferred') );
+
+But keep in mind that Underscore is not a strict requirement, and assigning it
+to another namespace will always work.
 
 ## Build
 
@@ -58,27 +71,12 @@ To run headless Qunit tests (must have phantomjs in your path)
 $ node build qunit
 ```
 
+## Contributors
 
-## Usage
-
-Underscore.Deferred works on the server and in the browser.
-
-In the browser, just require it like you would any other file. If you're
-including Underscore on the page, make sure you include it before
-Underscore.Deferred. If you don't have Underscore, the plugin attaches to
-`window._`.
-
-Addionally, underscore.Deferred can be used with the [Ender.js build
-tool][ender], if you're into that sort of thing.
-
-On the server, simply install via npm and require normally. If you'd like to
-use it as an Underscore module, just do this:
-
-    var _ = require('underscore')._
-    _.mixin( require('underscore.deferred') );
-
-But keep in mind the Underscore is not a strict requirement, and assigning it
-to another namespace will always work.
+* [rwldrn](https://github.com/rwldrn)
+* [tbranyen](https://github.com/tbranyen)
+* [taxillian](https://github.com/taxilian)
+* [danheberden](https://github.com/danheberden)
 
 ## Roadmap
 

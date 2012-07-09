@@ -1,5 +1,5 @@
 {
-  "name": "underscore.Deferred",
+  "name": "underscore.deferred",
   "description": "jQuery style Deferreds",
   "version": "0.1.4",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",

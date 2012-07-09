@@ -1,7 +1,7 @@
 {
   "name": "underscore.Deferred",
   "description": "jQuery style Deferreds",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/wookiehangover/underscore.Deferred",
   "author": {
     "name": "Sam Breed",
@@ -34,5 +34,9 @@
     "underscore": "*",
     "mocha": "*"
   },
-  "keywords": ["deferreds", "underscore", "flow-control"]
+  "keywords": [
+    "deferreds",
+    "underscore",
+    "flow-control"
+  ]
 }

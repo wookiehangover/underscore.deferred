@@ -20,7 +20,7 @@
       "url": "https://github.com/wookiehangover/underscore.Deferred/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/underscore.deferred",
+  "main": "lib/underscore.deferred.js",
   "engines": {
     "node": "*"
   },

@@ -2,7 +2,7 @@
 
 v0.1.4
 
-**Please note that as of 0.1.4 underscore.deferred will ALL LOWERCASE on
+**Please note that as of 0.1.4 underscore.deferred will be ALL LOWERCASE on
 npm.** The camelcasing was a mistake from the outset, please update your
 `package.json` appropriately.
 

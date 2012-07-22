@@ -14,33 +14,33 @@ and implementation from jQuery 1.7.2, with all the associated helpers.
 
 jQuery offers a robust, consistent and well documented API; this project aims
 to make it portable. jQuery added a handful of helper methods to their
-implementation of the [Common.js Promise Spec][promise], and they're faithfully
+implementation of the [Common.js Promises Spec][promise], and they're faithfully
 reproduced without any dependencies.
 
-Underscore.Deferred supports the following methods:
+underscore.deferred provides complete pairity with the jQuery Deferred
+API. Here are some of the method implemented:
 
-* [done](http://api.jquery.com/deferred.done/)
-* [resolve](http://api.jquery.com/deferred.resolve/)
-* [isResolved](http://api.jquery.com/deferred.isresolved/)
-* [then](http://api.jquery.com/deferred.then/)
 * [always](http://api.jquery.com/deferred.always/)
+* [done](http://api.jquery.com/deferred.done/)
 * [fail](http://api.jquery.com/deferred.fail/)
-* [reject](http://api.jquery.com/deferred.reject/)
-* [isRejected](http://api.jquery.com/deferred.isrejected/)
-* [pipe](http://api.jquery.com/deferred.pipe/)
-* [promise](http://api.jquery.com/deferred.promise/)
 * [notify](http://api.jquery.com/deferred.notify/)
 * [notifyWith](http://api.jquery.com/deferred.notifywith/)
+* [pipe](http://api.jquery.com/deferred.pipe/)
+* [promise](http://api.jquery.com/deferred.promise/)
+* [resolve](http://api.jquery.com/deferred.resolve/)
+* [reject](http://api.jquery.com/deferred.reject/)
+* [state](http://api.jquery.com/deferred.notifywith/)
+* [then](http://api.jquery.com/deferred.then/)
 
-For specific API documentation, look to the [jQuery Docs][jquery-docs].
+For the complete API documentation, look to the [jQuery Docs][jquery-docs].
 
 ## Usage
 
-Underscore.Deferred works on the server and in the browser.
+underscore.deferred works on the server and in the browser.
 
 In the browser, just require it like you would any other file. If you're
 including Underscore on the page, make sure you include it before
-Underscore.Deferred. If you don't have Underscore, the plugin attaches to
+underscore.deferred. If you don't have Underscore, the plugin attaches to
 `window._`.
 
 Addionally, underscore.Deferred can be used with the [Ender.js build

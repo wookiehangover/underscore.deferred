@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       files: ['test/*.html']
     },
     lint: {
-      files: ['grunt.js', 'lib/underscore.deferred.js']
+      files: ['grunt.js', 'underscore.deferred.js']
     },
     watch: {
       files: '<config:lint.files>',

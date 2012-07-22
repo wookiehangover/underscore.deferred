@@ -1,5 +1,5 @@
 var _ = require('underscore')._;
-_.mixin( require('../lib/underscore.deferred') );
+_.mixin( require('../underscore.deferred') );
 
 function asyncEvent(){
     var dfd = new _.Deferred();

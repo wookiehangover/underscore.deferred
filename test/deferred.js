@@ -1,17 +1,3 @@
-if( typeof module !== "undefined" && module.exports ){
-  var
-    _ = require('underscore'),
-    assert = require('assert'),
-    ok = assert.ok,
-    equal = assert.equal,
-    expect = function(){},
-    deepEqual = assert.deepEqual,
-    strictEqual = assert.strictEqual,
-    notStrictEqual = assert.notStrictEqual;
-
-  _.mixin( require('../lib/underscore.deferred') );
-}
-
 test("its should be part of Underscore", function() {
   ok( _.VERSION );
   equal( typeof _.Deferred, 'function' );

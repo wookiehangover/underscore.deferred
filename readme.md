@@ -1,6 +1,8 @@
 # Underscore.Deferred
 
-v0.1.4
+[![Build Status](https://secure.travis-ci.org/wookiehangover/underscore.deferred.png?branch=master)](http://travis-ci.org/wookiehangover/underscore.deferred)
+
+v0.1.5
 
 **Please note that as of 0.1.4 underscore.deferred will be ALL LOWERCASE on
 npm.** The camelcasing was a mistake from the outset, please update your

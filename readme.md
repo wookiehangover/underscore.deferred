@@ -2,17 +2,18 @@
 
 [![Build Status](https://secure.travis-ci.org/wookiehangover/underscore.deferred.png?branch=master)](http://travis-ci.org/wookiehangover/underscore.deferred)
 
-v0.1.5
+v0.2.0 (jQuery 1.8.0)
+
+This is a port of jQuery.Deferred as an Underscore mixin, but it can be
+used without any depencencies. It currently matches the Deferred specifications
+and implementation from jQuery 1.8.0, with all the associated helpers.
 
 **Please note that as of 0.1.4 underscore.deferred will be ALL LOWERCASE on
 npm.** The camelcasing was a mistake from the outset, please update your
 `package.json` appropriately.
 
-This is a port of jQuery.Deferred as an Underscore mixin, but it can be
-used without any depencencies. It currently matches the Deferred specifications
-and implementation from jQuery 1.7.2, with all the associated helpers.
 
-## Deferred's are great, let's take them everywhere
+## Deferreds are great, let's take them everywhere
 
 jQuery offers a robust, consistent and well documented API; this project aims
 to make it portable. jQuery added a handful of helper methods to their
@@ -29,12 +30,19 @@ API. Here are some of the method implemented:
 * [notifyWith](http://api.jquery.com/deferred.notifywith/)
 * [pipe](http://api.jquery.com/deferred.pipe/)
 * [promise](http://api.jquery.com/deferred.promise/)
-* [resolve](http://api.jquery.com/deferred.resolve/)
 * [reject](http://api.jquery.com/deferred.reject/)
+* [rejectWith](http://api.jquery.com/deferred.rejectWith/)
+* [resolve](http://api.jquery.com/deferred.resolve/)
+* [resolveWith](http://api.jquery.com/deferred.resolve/)
 * [state](http://api.jquery.com/deferred.notifywith/)
 * [then](http://api.jquery.com/deferred.then/)
+* [when](http://api.jquery.com/jQuery.when/)
 
 For the complete API documentation, look to the [jQuery Docs][jquery-docs].
+
+This project wouldn't exist if not for the the hard work and effort put
+into jQuery by its core team and contributors--thanks for making this
+possible!
 
 ## Usage
 
@@ -68,13 +76,13 @@ $ npm install
 To build with [grunt](https://github.com/cowboy/grunt)
 
 ```
-$ node build
+$ grunt
 ```
 
 To run headless Qunit tests (must have phantomjs in your path)
 
 ```
-$ node build qunit
+$ grunt qunit
 ```
 
 ## Contributors

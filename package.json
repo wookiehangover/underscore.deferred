@@ -34,12 +34,11 @@
     "mocha": "*"
   },
   "keywords": [
-    "underscore deferreds",
-    "deferreds",
-    "deferred",
-    "flow-control",
-    "underscore",
-    "jquery",
+    "underscore deferreds", "underscore deferred",
+    "deferreds", "deferred", "Deferred", "defered",
+    "flow", "control", "async", "asynchronous", "flow-control",
+    "underscore", "_",
+    "jquery", "jQuery",
     "ender"
   ],
   "main": "./underscore.deferred.js",

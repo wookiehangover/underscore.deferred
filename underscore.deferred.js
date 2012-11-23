@@ -361,10 +361,11 @@
     return deferred;
   };
 
-    // Deferred helper
-    _d.when = function( subordinate /* , ..., subordinateN */ ) {
+  // Deferred helper
+  _d.when = function( subordinate /* , ..., subordinateN */ ) {
     var i = 0,
-      resolveValues = slice.call( arguments ),
+      resolveValues = _type(subordinate) === 'array' && arguments.length === 1 ?
+        subordinate : slice.call( arguments ),
       length = resolveValues.length,
 
       // the count of uncompleted subordinates

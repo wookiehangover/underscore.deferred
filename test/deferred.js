@@ -1,9 +1,11 @@
+/*globals _,test,expect,ok,equal,deepEqual,strictEqual,notStrictEqual*/
 test("its should be part of Underscore", function() {
   ok( _.VERSION );
   ok( _.Deferred );
   ok( _.when );
   ok( _.Callbacks );
 });
+var _expandedEach;
 
 _.each( [ "", " - new operator" ], function( withNew ) {
 
@@ -298,7 +300,7 @@ test( "_.Deferred.then - context", function() {
 
 test( "_.when" , function() {
 
-  expect( 34 );
+  expect( 40 );
 
   // Some other objects
   _.each( {
@@ -346,6 +348,36 @@ test( "_.when" , function() {
       cache = value;
     });
 
+  });
+
+  // Will apply the contents of an array if it's a single argument
+  var dfds = [ _.Deferred(), _.Deferred(), _.Deferred() ];
+
+  var promises = _.map(dfds, function(dfd){
+    return dfd.promise();
+  });
+
+  _.each(dfds, function(dfd, index){
+    dfd.resolve( "Promise "+ (index + 1) );
+  });
+
+  _.when(promises).done(function(){
+    var args = [].slice.call(arguments);
+    _.each([ 1, 2, 3], function(i, k){
+      equal( args[k], "Promise "+ i );
+    });
+  });
+
+  // But will treat Arrays normally if they're not the only argument
+  _.when(promises, "foo").done(function(p, s){
+    strictEqual(p, promises);
+    equal(s, "foo");
+  });
+
+  // And work on mixed arrays (with Deferreds and normal objects)
+  promises.splice( 1, 0, { foo: "bar" });
+  _.when(promises).done(function(res0, res1){
+    deepEqual(res1, { foo: "bar"});
   });
 
 });

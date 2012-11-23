@@ -12,7 +12,6 @@ and implementation from jQuery 1.8.0, with all the associated helpers.
 npm.** The camelcasing was a mistake from the outset, please update your
 `package.json` appropriately.
 
-
 ## Deferreds are great, let's take them everywhere
 
 jQuery offers a robust, consistent and well documented API; this project aims
@@ -43,6 +42,30 @@ For the complete API documentation, look to the [jQuery Docs][jquery-docs].
 This project wouldn't exist if not for the the hard work and effort put
 into jQuery by its core team and contributors--thanks for making this
 possible!
+
+## Enhancements / Changes
+
+So far, there's only 1 substantial difference between the jQuery API and
+underscore.deffered's. This may change in the future as new or
+divergent functionality is tested out, but rest assured that all differences
+will be called out here (and will have proper test coverage :-).
+
+###_.when
+
+underscore.deferred will `apply` an Array if it's the only argument, providing a
+useful shortcut for using `when` with an array of promises. Example:
+
+    var form = _.Deferred();
+    var auth = _.Deferred();
+
+    var promises = [ form.promise(), auth.promise() ];
+
+    _.when(promises).done(function(){
+      // ...
+    });
+
+    form.resolve();
+    auth.resolve();
 
 ## Usage
 

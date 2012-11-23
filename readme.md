@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/wookiehangover/underscore.deferred.png?branch=master)](http://travis-ci.org/wookiehangover/underscore.deferred)
 
-v0.2.0 (jQuery 1.8.0)
+v0.3.0 (jQuery 1.8.0)
 
 This is a port of jQuery.Deferred as an Underscore mixin, but it can be
 used without any depencencies. It currently matches the Deferred specifications
@@ -48,7 +48,7 @@ possible!
 So far, there's only 1 substantial difference between the jQuery API and
 underscore.deffered's. This may change in the future as new or
 divergent functionality is tested out, but rest assured that all differences
-will be called out here (and will have proper test coverage :-).
+will be called out here (and will have proper test coverage.)
 
 ###_.when
 

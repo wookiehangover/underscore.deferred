@@ -1,6 +1,12 @@
-module("callbacks");
+if( typeof module !== "undefined" && typeof require !== "undefined" ){
+  var _ = require('underscore');
+  _.mixin( require('../underscore.deferred') );
+} else {
+  module("callbacks");
+}
 
-(function() {
+
+(function(window) {
 
 var output,
   addToOutput = function( string ) {
@@ -202,7 +208,7 @@ _.each( tests, function( resultString, strFlags ) {
     });
 });
 
-})();
+})(typeof window === "undefined" ? global : window);
 
 test( "_.Callbacks( options ) - options are copied", function() {
 

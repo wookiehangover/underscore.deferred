@@ -1,4 +1,10 @@
 /*globals _,test,expect,ok,equal,deepEqual,strictEqual,notStrictEqual*/
+
+if( typeof module !== "undefined" && typeof require !== "undefined" ){
+  var _ = require('underscore');
+  _.mixin( require('../underscore.deferred') );
+}
+
 test("its should be part of Underscore", function() {
   ok( _.VERSION );
   ok( _.Deferred );
@@ -302,6 +308,8 @@ test( "_.when" , function() {
 
   expect( 40 );
 
+  var win = typeof window === "undefined" ? global : window;
+
   // Some other objects
   _.each( {
 
@@ -318,14 +326,14 @@ test( "_.when" , function() {
   } , function( value, message ) {
 
     ok( _.isFunction( _.when( value ).done(function( resolveValue ) {
-      strictEqual( this, window, "Context is the global object with " + message );
+      strictEqual( this, win, "Context is the global object with " + message );
       strictEqual( resolveValue , value , "Test the promise was resolved with " + message );
     }).promise ) , "Test " + message + " triggers the creation of a new Promise" );
 
   } );
 
   ok( _.isFunction( _.when().done(function( resolveValue ) {
-    strictEqual( this, window, "Test the promise was resolved with window as its context" );
+    strictEqual( this, win, "Test the promise was resolved with window as its context" );
     strictEqual( resolveValue, undefined, "Test the promise was resolved with no parameter" );
   }).promise ) , "Test calling when with no parameter triggers the creation of a new Promise" );
 

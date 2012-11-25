@@ -24,14 +24,14 @@
     "node": "*"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "grunt qunit && qunit -l '{ summary:true, errors:true }' -c ./underscore.deferred.js -t ./test/*.js"
   },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.3.9",
     "rimraf": "~2.0.1",
     "underscore": "*",
-    "mocha": "*"
+    "qunit": "*"
   },
   "keywords": [
     "underscore deferreds", "underscore deferred",

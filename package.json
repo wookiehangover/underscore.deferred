@@ -1,7 +1,7 @@
 {
   "name": "underscore.deferred",
   "description": "jQuery style Deferreds",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/wookiehangover/underscore.deferred",
   "author": {
     "name": "Sam Breed",

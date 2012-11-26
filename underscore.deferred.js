@@ -174,8 +174,10 @@
             (function add( args ) {
               _each( args, function( arg ) {
                 var type = _type( arg );
-                if ( type === "function" && ( !options.unique || !self.has( arg ) ) ) {
-                  list.push( arg );
+                if ( type === "function" ) {
+                  if ( !options.unique || !self.has( arg ) ) {
+                    list.push( arg );
+                  }
                 } else if ( arg && arg.length && type !== "string" ) {
                   // Inspect recursively
                   add( arg );
@@ -318,7 +320,7 @@
         // Get a promise for this deferred
         // If obj is provided, the promise aspect is added to the object
         promise: function( obj ) {
-          return typeof obj === "object" ? _extend( obj, promise ) : promise;
+          return obj != null ? _extend( obj, promise ) : promise;
         }
       },
       deferred = {};

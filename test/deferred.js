@@ -21,7 +21,7 @@ _.each( [ "", " - new operator" ], function( withNew ) {
 
   test("_.Deferred" + withNew, function() {
 
-    expect( 21 );
+    expect( 23 );
 
     var defer = createDeferred();
 
@@ -50,6 +50,22 @@ _.each( [ "", " - new operator" ], function( withNew ) {
       this.resolve( "done" );
     }).done( function( value ) {
       strictEqual( value , "done" , "Passed function executed" );
+    });
+
+    createDeferred(function( defer ) {
+      var promise = defer.promise(),
+        func = function() {},
+        funcPromise = defer.promise( func );
+      strictEqual( defer.promise(), promise, "promise is always the same" );
+      strictEqual( funcPromise, func, "non objects get extended" );
+      _.each( promise, function( value, key ) {
+        if ( !_.isFunction( promise[ key ] ) ) {
+          ok( false, key + " is a function (" + _.type( promise[ key ] ) + ")" );
+        }
+        if ( promise[ key ] !== func[ key ] ) {
+          strictEqual( func[ key ], promise[ key ], key + " is the same" );
+        }
+      });
     });
 
     _expandedEach = _.each;

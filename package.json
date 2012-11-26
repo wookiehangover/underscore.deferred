@@ -42,5 +42,15 @@
     "ender"
   ],
   "main": "./underscore.deferred.js",
-  "ender": "./lib/ender.js"
+  "ender": "./lib/ender.js",
+  "jam": {
+    "main": "dist/underscore.deferred.js",
+    "include": ["dist/underscore.deferred.js"],
+    "dependencies": {
+      "lodash": "*"
+    },
+    "shim": {
+      "deps": ["lodash"]
+    }
+  }
 }

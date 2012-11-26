@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/wookiehangover/underscore.deferred.png?branch=master)](http://travis-ci.org/wookiehangover/underscore.deferred)
 
-v0.3.1 (jQuery 1.8.3)
+v0.4.0 (jQuery 1.8.3)
 
 This is a port of jQuery.Deferred as an Underscore mixin, but it can be
 used without any depencencies. It currently matches the Deferred specifications
@@ -42,7 +42,7 @@ you're still into that sort of thing.
 
 ## Enhancements / Changes
 
-So far, there's only 1 substantial difference between the jQuery API and
+So far, there are only 2 substantial differences between the jQuery API and
 underscore.deffered's. This may change in the future as new or
 divergent functionality is tested out, but rest assured that all differences
 will be called out here (and will have proper test coverage.)
@@ -63,6 +63,69 @@ useful shortcut for using `when` with an array of promises. Example:
 
     form.resolve();
     auth.resolve();
+
+###_.then
+
+Inspired by @domenic's
+[Promises/A compliance suite](https://github.com/domenic/promise-tests)
+(and the [accompanying gist](https://gist.github.com/3889970)), the
+0.4.0 release of underscore.deferred diverges from jQuery's
+implementation slightly.
+
+First, throwing an error from within a handler in `then` will reject the
+deferred object issued by `then` with the error message. Example:
+
+    var dfd = _.Deferred();
+
+    dfd.then(function(){
+      throw new Error("Oops!");
+    }).fail(function( err ){
+      console.log(err.message); // "Oops!"
+    });
+
+    dfd.resolve();
+
+This behavior alone isn't divergent from jQuery (all tests pass). It's
+handy for bubbling errors from callbacks without entering [callback
+hell](http://callbackhell.com/).
+
+Second, when chaining `then`'s or using the *new* deferred object issued by a
+call to `then` **the state of the first deferred is not passed to
+subsequent calls to `then`**. Example:
+
+    var dfd = _.Deferred();
+    dfd.then(null, function( a, b ){
+      return a * b;
+    }).then(function( value ){
+      equal(value, 6); // the second deferred is resolved
+    }, function(){
+      // reject handler never called
+    });
+
+    dfd.reject(2, 3); // the first deferred in the chain is rejected
+
+When paired with the first behavior, it makes chaining deferred's even
+more useful.
+
+Unfortunately, this second point is divergent from jQuery's
+implementation, with one failing test. jQuery maintains the state of the
+first deferred object _unless the handler returns a new deferred_.
+
+Here's an example of the "old" behavior (what's currently in jQuery 1.8.3):
+
+    var dfd = _.Deferred();
+    dfd.then(null, function( a, b ){
+      return a * b;
+    }).then(function(){
+      // resolve handler never called
+    }, function( value ){
+      equal(value, 6); // the second deferred is also rejected
+    });
+
+    dfd.reject(2, 3); // the first deferred in the chain is rejected
+
+In the spirit of fidelity to Promises/A, underscored.deferred favors the
+new behavior.
 
 ## API
 
@@ -127,6 +190,8 @@ This is a work in progress, feel free to contribute.
 
 ## Release Notes
 
+0.4.0 - adding divergent behavior for [_.then](https://github.com/wookiehangover/underscore.deferred#_then)
+
 0.3.1 - updating to match jQuery 1.8.3
 
 0.3.0 - adding divergent behavior for [_.when](https://github.com/wookiehangover/underscore.deferred#_when)
@@ -142,4 +207,3 @@ MIT License.
 [promise]: http://wiki.commonjs.org/wiki/Promises
 [jquery-docs]: http://api.jquery.com/category/deferred-object/
 [ender]: http://ender.no.de/
-

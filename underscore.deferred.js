@@ -377,14 +377,18 @@
   };
 
   // Deferred helper
-  _d.when = function( subordinate /* , ..., subordinateN */ ) {
+  _d.when = function( subordinate /* , ..., subordinateN */ ) { 
+
     var i = 0,
-      resolveValues = _type(subordinate) === 'array' && arguments.length === 1 ?
-        subordinate : slice.call( arguments ),
-      length = resolveValues.length,
+      resolveValues = ( _type(subordinate) === 'array' && arguments.length === 1 ) ? subordinate : slice.call( arguments ),
+      length = resolveValues.length;
+
+      if ( _type(subordinate) === 'array' && subordinate.length === 1 ) {
+        subordinate = subordinate[ 0 ];
+      }
 
       // the count of uncompleted subordinates
-      remaining = length !== 1 || ( subordinate && _isFunction( subordinate.promise ) ) ? length : 0,
+      var remaining = length !== 1 || ( subordinate && _isFunction( subordinate.promise ) ) ? length : 0,
 
       // the master Deferred. If resolveValues consist of only a single Deferred, just use that.
       deferred = remaining === 1 ? subordinate : _d.Deferred(),

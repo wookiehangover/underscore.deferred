@@ -417,6 +417,80 @@ test( "_.when" , function() {
 
 });
 
+test( "_.when - one item array as argument" , function() {
+
+  expect( 33 );
+
+  var win = typeof window === "undefined" ? global : window;
+
+  // Some other objects
+  _.each( {
+
+    "an empty string": "",
+    "a non-empty string": "some string",
+    "zero": 0,
+    "a number other than zero": 1,
+    "true": true,
+    "false": false,
+    "null": null,
+    "undefined": undefined,
+    "a plain object": {}
+
+  } , function( value, message ) {
+
+    ok( _.isFunction( _.when( value ).done(function( resolveValue ) {
+      strictEqual( this, win, "Context is the global object with " + message );
+      strictEqual( resolveValue , value , "Test the promise was resolved with " + message );
+    }).promise ) , "Test " + message + " triggers the creation of a new Promise" );
+
+  } );
+
+  ok( _.isFunction( _.when().done(function( resolveValue ) {
+    strictEqual( this, win, "Test the promise was resolved with window as its context" );
+    strictEqual( resolveValue, undefined, "Test the promise was resolved with no parameter" );
+  }).promise ) , "Test calling when with no parameter triggers the creation of a new Promise" );
+
+  var context = {};
+
+  _.when( _.Deferred().resolveWith( context ) ).done(function() {
+    strictEqual( this, context, "when( promise ) propagates context" );
+  });
+
+  var cache;
+
+  _.each([ 1 ], function(i, k) {
+
+    _.when( cache || _.Deferred( function() {
+        this.resolve( i );
+      })
+    ).done(function( value ) {
+
+      strictEqual( value, 1 , "Function executed" + ( i > 1 ? " only once" : "" ) );
+      cache = value;
+    });
+
+  });
+
+  // Will apply the contents of an array if it has a single item
+  var dfds = [ _.Deferred() ];
+
+  var promises = _.map(dfds, function(dfd){
+    return dfd.promise();
+  });
+
+  _.each( dfds, function( dfd, index ){
+    dfd.resolve( "Promise "+ (index + 1) );
+  });
+
+  _.when( promises ).done(function(){
+    var args = [].slice.call(arguments);
+    _.each([ 1 ], function(i, k){
+      equal( args[k], "Promise "+ i );
+    });
+  });
+
+});
+
 test("_.when - joined", function() {
 
   expect( 119 );
@@ -478,6 +552,4 @@ test("_.when - joined", function() {
   } );
   deferreds.futureSuccess.resolve( 1 );
   deferreds.futureError.reject( 0 );
-
 });
-

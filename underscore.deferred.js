@@ -383,15 +383,20 @@
       resolveValues = ( _type(subordinate) === 'array' && arguments.length === 1 ) ? subordinate : slice.call( arguments ),
       length = resolveValues.length;
 
-      if ( _type(subordinate) === 'array' && subordinate.length === 1 ) {
-        subordinate = subordinate[ 0 ];
+      // the count of uncompleted subordinates
+      var remaining;
+      
+      if ( _type(subordinate) === 'array' ) {
+          remaining = length;
+          if ( subordinate.length === 1 ) {
+              subordinate = subordinate[ 0 ];
+          }
+      } else {
+          remaining = length !== 1 || ( subordinate && _isFunction( subordinate.promise ) ) ? length : 0;
       }
 
-      // the count of uncompleted subordinates
-      var remaining = length !== 1 || ( subordinate && _isFunction( subordinate.promise ) ) ? length : 0,
-
       // the master Deferred. If resolveValues consist of only a single Deferred, just use that.
-      deferred = remaining === 1 ? subordinate : _d.Deferred(),
+      var deferred = remaining === 1 ? subordinate : _d.Deferred(),
 
       // Update function for both resolve and progress values
       updateFunc = function( i, contexts, values ) {
